@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Happy Birthday! 🌹CHANCHAN",
+    "subtitle": "To someone incredibly precious ✨",
+    "showHearts": true
+  },
+  "recipient": {
+    "name": "Chanchan"
+  },
+  "wish": [
+    "Ngasise eise karigino asuk pangal kankhatpagumsu toui haraobagumsu toui. Aduga ngasise nngi birthday oi leirmbei wani.",
+    "✨ Happy Birthday to someone truly special! ✨",
+    "It feels almost unbelievable that we’ve only been talking for a short while, because in that little time you’ve already shown me how truly special you are. There’s a certain elegance about you, something soft and graceful that makes you stand out in the simplest of ways. Even your voice carries a charm that lingers, the kind that can turn an ordinary moment into something memorable.",
+    "I admire your hardworking nature and the dedication you put into the things that matter to you. It’s inspiring to see someone so focused, yet so kind and grounded at the same time. You have a balance that not many people manage to hold .You are  beauty, effort, and heart all in one.",
+    "What moves me even more is your strength. I know you’ve endured traumas and tides that could easily break someone down, but you chose to rise above them. To go through all of that and still carry yourself with grace is not just admirable, it’s remarkable. You’ve turned pain into resilience, and that’s something I respect deeply about you.",
+    "There’s also a warmth in you that can’t go unnoticed. The way you make people feel at ease, the way your presence softens the air , it’s rare and precious. It’s the kind of quality that makes people lucky just to know you.",
+    "On this birthday, I hope life gives back to you everything you deserve i.e, happiness, peace, and all the little joys that make the heart light. May this year bring you love in its purest forms, laughter that heals, and success that feels effortless because you’ve already worked so hard for it.",
+    "I’m truly grateful that our paths crossed. Even in these early conversations, I can already tell you’re someone unforgettable. Here’s to more talks, more moments, and to the light you’ll continue to spread in the lives of people around you.! 💖"
+  ],
+  "music": {
+    "type": "file",
+    "src": "/uploads/audio/1755441547917-spn9w1cgds.mp3"
+  },
+  "gallery": [
+    {
+      "url": "/uploads/images/1755378760340-7zrchcgiy53.jpeg"
+    }
+  ],
+  "links": [
+    {
+      "title": "v",
+      "url": "https://i.pinimg.com/736x/d0/f6/99/d0f699a684c510562f174d12a634de0e.jpg"
+    },
+    {
+      "title": "a",
+      "url": "https://i.pinimg.com/736x/69/79/b5/6979b50a87fed051c61e7146cb1c6e9c.jpg"
+    },
+    {
+      "title": "c",
+      "url": "https://i.pinimg.com/736x/f6/1c/a2/f61ca254c1ad40e68497e1193aaf3e72.jpg"
+    }
+  ]
+}

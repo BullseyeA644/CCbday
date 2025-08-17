@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#ec4899" />
+    <title>Happy Birthday Beautiful! 🌹</title>
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="rose-gradient min-h-screen poppins antialiased">
+    <noscript>
+      <div class="bg-rose-600 text-white text-center p-4">
+        This page uses JavaScript for music, gallery, and animations. Please
+        enable JavaScript.
+      </div>
+    </noscript>
+
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container" aria-hidden="true"></div>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+      <div class="text-center z-10 fade-in">
+        <h1
+          class="dancing-script text-6xl md:text-8xl font-bold text-white mb-4 sparkle"
+        >
+          Happy Birthday! 🌹
+        </h1>
+        <p class="text-xl md:text-2xl text-pink-100 mb-8 font-light">
+          To someone incredibly precious ✨
+        </p>
+        <div class="heart-pulse text-6xl mb-8" aria-hidden="true">💖</div>
+        <button
+          id="begin-btn"
+          class="bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/70"
+        >
+          Begin the Celebration 🎉
+        </button>
+      </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="music-section" class="py-16 px-4 reveal">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="dancing-script text-5xl font-bold text-white mb-8">
+          Your Special Song 🎵
+        </h2>
+        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8 mb-8">
+          <div class="mb-6">
+            <label class="block text-white text-lg mb-2"
+              >Choose your music source:</label
+            >
+            <div class="flex flex-wrap justify-center gap-4 mb-4">
+              <button data-music="file" class="btn-pink">Upload MP3 📁</button>
+              <button data-music="youtube" class="btn-red">
+                YouTube Link 📺
+              </button>
+              <button data-music="spotify" class="btn-green">
+                Spotify Link 🎧
+              </button>
+            </div>
+          </div>
+
+          <div id="music-file" class="hidden">
+            <input
+              type="file"
+              accept="audio/*"
+              id="audioFile"
+              class="mb-4 block mx-auto"
+            />
+            <button id="play-audio" class="btn-pink-strong">
+              Play Music 🎵
+            </button>
+            <audio id="audioPlayer" controls class="w-full mt-4 hidden"></audio>
+          </div>
+
+          <div id="music-youtube" class="hidden">
+            <input
+              type="text"
+              id="youtubeLink"
+              placeholder="Paste YouTube link here..."
+              class="w-full p-3 rounded-lg mb-4 text-gray-800"
+            />
+            <button id="load-youtube" class="btn-red-strong">
+              Load Video 📺
+            </button>
+            <div id="youtube-player" class="mt-4"></div>
+          </div>
+
+          <div id="music-spotify" class="hidden">
+            <input
+              type="text"
+              id="spotifyLink"
+              placeholder="Paste Spotify track link..."
+              class="w-full p-3 rounded-lg mb-4 text-gray-800"
+            />
+            <button id="load-spotify" class="btn-green-strong">
+              Load Track 🎧
+            </button>
+            <div id="spotify-player" class="mt-4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Section -->
+    <section id="photo-section" class="py-16 px-4 reveal">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="dancing-script text-5xl font-bold text-white mb-8">
+          Your Beautiful Moment 📸
+        </h2>
+        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8">
+          <div class="mb-6">
+            <input
+              type="file"
+              accept="image/*"
+              id="photoUpload"
+              class="hidden"
+            />
+            <button id="choose-photo" class="btn-pink-strong text-lg">
+              Add Her Beautiful Photo 📷
+            </button>
+          </div>
+          <div id="photo-display" class="hidden">
+            <img
+              id="uploaded-photo"
+              class="max-w-full h-auto rounded-2xl shadow-2xl mx-auto"
+              style="max-height: 70vh"
+              alt="Uploaded memory"
+            />
+            <p class="text-white mt-4 text-lg">Absolutely stunning! ✨</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Birthday Wish Section -->
+    <section id="wish-section" class="py-16 px-4 reveal">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="dancing-script text-5xl font-bold text-white mb-8">
+          Special Birthday Wish 💝
+        </h2>
+        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8">
+          <div class="mb-6">
+            <button
+              id="reveal-wish-btn"
+              class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-4 rounded-full hover:from-pink-600 hover:to-rose-600 transition-all text-lg font-semibold shadow-lg"
+            >
+              Click to Reveal Your Wish 🎁
+            </button>
+          </div>
+          <div id="birthday-wish" class="hidden">
+            <div class="text-white text-xl leading-relaxed space-y-4">
+              <p class="dancing-script text-3xl">
+                ✨ Happy Birthday to someone truly special! ✨
+              </p>
+              <p>
+                May your day be filled with happiness and your year with joy.
+              </p>
+              <p>
+                You bring so much light into this world, and today we celebrate
+                YOU!
+              </p>
+              <p>
+                Here's to another year of wonderful memories and beautiful
+                moments.
+              </p>
+              <p class="dancing-script text-2xl text-pink-200">
+                You are precious beyond words! 💖
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pinterest Gallery Section -->
+    <section id="gallery-section" class="py-16 px-4 reveal">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="dancing-script text-5xl font-bold text-white mb-8">
+          Memory Gallery 🖼️
+        </h2>
+        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8">
+          <div class="mb-6">
+            <input
+              type="text"
+              id="pinterest-link"
+              placeholder="Paste a direct image URL (jpg, png, gif, webp) or any image link..."
+              class="w-full max-w-md p-3 rounded-lg mb-4 text-gray-800 mx-auto block"
+            />
+            <button id="add-image" class="btn-pink-strong">
+              Add Image to Gallery 🖼️
+            </button>
+            <p class="text-pink-100 text-sm mt-2">
+              Tip: Some Pinterest page URLs aren’t direct images. Use the
+              image’s direct URL if possible.
+            </p>
+          </div>
+          <div
+            id="image-gallery"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"
+          >
+            <!-- Images will be added here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links-section" class="py-16 px-4 reveal">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="dancing-script text-5xl font-bold text-white mb-8">
+          Special Links 🔗
+        </h2>
+        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8">
+          <div class="mb-6 space-y-4">
+            <input
+              type="text"
+              id="link-title"
+              placeholder="Link title (e.g., 'Our Favorite Song')"
+              class="w-full max-w-md p-3 rounded-lg text-gray-800 mx-auto block"
+            />
+            <input
+              type="url"
+              id="link-url"
+              placeholder="https://..."
+              class="w-full max-w-md p-3 rounded-lg text-gray-800 mx-auto block"
+            />
+            <button id="add-link" class="btn-pink-strong">
+              Add Special Link 💕
+            </button>
+          </div>
+          <div id="links-container" class="space-y-4 mt-8">
+            <!-- Links will be added here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Message -->
+    <section class="py-16 px-4 text-center reveal">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="dancing-script text-6xl font-bold text-white mb-8">
+          You Are Loved! 💖
+        </h2>
+        <p class="text-xl text-pink-100 mb-8">
+          Hope your special day is as wonderful as you are!
+        </p>
+        <div class="text-4xl" aria-hidden="true">🌹✨🎂✨🌹</div>
+      </div>
+    </section>
+
+    <!-- App logic -->
+    <script defer src="./main.js"></script>
+  </body>
+</html>

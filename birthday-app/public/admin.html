@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Birthday Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen poppins rose-gradient">
+    <div class="max-w-5xl mx-auto p-6">
+      <header class="mb-6 text-white">
+        <h1 class="dancing-script text-5xl font-bold">
+          Admin — Happy Birthday 🎂
+        </h1>
+        <p class="opacity-90 mt-2">
+          Edit content, upload audio/images, and save.
+        </p>
+      </header>
+
+      <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-6 space-y-6">
+        <!-- Hero -->
+        <section>
+          <h2 class="text-white text-2xl font-semibold mb-3">Hero</h2>
+          <div class="grid gap-3">
+            <input
+              id="hero-title"
+              class="field p-3 rounded"
+              placeholder="Title"
+            />
+            <input
+              id="hero-subtitle"
+              class="field p-3 rounded"
+              placeholder="Subtitle"
+            />
+            <label class="text-white inline-flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="hero-hearts"
+                class="scale-125"
+                checked
+              />
+              Show floating hearts
+            </label>
+            <input
+              id="recipient-name"
+              class="field p-3 rounded"
+              placeholder="Recipient name (optional)"
+            />
+            <!-- NEW: sender -->
+            <input
+              id="sender-name"
+              class="field p-3 rounded"
+              placeholder="From Angaanba"
+            />
+          </div>
+        </section>
+
+        <!-- Wish -->
+        <section>
+          <h2 class="text-white text-2xl font-semibold mb-3">Birthday Wish</h2>
+          <textarea
+            id="wish-text"
+            class="field p-3 rounded h-40"
+            placeholder="Write lines; new line = new paragraph."
+          ></textarea>
+        </section>
+
+        <!-- Music -->
+        <section>
+          <h2 class="text-white text-2xl font-semibold mb-3">Music</h2>
+          <div class="bg-white/30 rounded p-4 space-y-3">
+            <div class="flex flex-wrap gap-4">
+              <label class="text-white"
+                ><input type="radio" name="music-type" value="none" checked />
+                None</label
+              >
+              <label class="text-white"
+                ><input type="radio" name="music-type" value="file" /> Upload
+                MP3</label
+              >
+              <label class="text-white"
+                ><input type="radio" name="music-type" value="youtube" />
+                YouTube Link</label
+              >
+              <label class="text-white"
+                ><input type="radio" name="music-type" value="spotify" />
+                Spotify Link</label
+              >
+            </div>
+
+            <div id="music-file" class="hidden">
+              <input id="audio-file" type="file" accept="audio/*" />
+              <button id="upload-audio" class="btn btn-rose mt-2">
+                Upload & Set
+              </button>
+              <p id="audio-url" class="text-white/90 text-sm mt-1"></p>
+            </div>
+
+            <div id="music-youtube" class="hidden">
+              <input
+                id="youtube-url"
+                class="field p-2 rounded"
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+            </div>
+
+            <div id="music-spotify" class="hidden">
+              <input
+                id="spotify-url"
+                class="field p-2 rounded"
+                placeholder="https://open.spotify.com/track/..."
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- Gallery -->
+        <section>
+          <h2 class="text-white text-2xl font-semibold mb-3">Gallery</h2>
+          <div class="bg-white/30 rounded p-4 space-y-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <input
+                id="image-url"
+                class="p-2 rounded flex-1 min-w-[260px]"
+                placeholder="Add image by URL (jpg/png/gif/webp)"
+              />
+              <button id="add-image-url" class="btn btn-rose">Add URL</button>
+              <input id="image-file" type="file" accept="image/*" />
+              <button id="upload-image" class="btn btn-green">Upload</button>
+            </div>
+            <div
+              id="gallery-list"
+              class="grid grid-cols-1 md:grid-cols-3 gap-3"
+            ></div>
+          </div>
+        </section>
+
+        <!-- Cute Pins -->
+        <section>
+          <h2 class="text-white text-2xl font-semibold mb-3">
+            Cute Pins (optional)
+          </h2>
+          <div class="bg-white/30 rounded p-4 space-y-3">
+            <p class="text-white/90 text-sm">
+              Paste direct <strong>Pinterest image URLs</strong> (or any image
+              URL). These will be shown as a cute collage on the recipient page.
+              <br />The <em>title</em> is optional and won’t be displayed.
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <input
+                id="link-title"
+                class="p-2 rounded flex-1 min-w-[200px]"
+                placeholder="(optional, not shown)"
+              />
+              <input
+                id="link-url"
+                class="p-2 rounded flex-1 min-w-[260px]"
+                placeholder="Paste Pinterest IMAGE URL (e.g., https://i.pinimg.com/...)"
+              />
+              <button id="add-link" class="btn btn-rose">Add Pin</button>
+            </div>
+            <div id="links-list" class="space-y-2"></div>
+          </div>
+        </section>
+
+        <div class="flex gap-3">
+          <button id="save-btn" class="btn btn-slate">💾 Save</button>
+          <a href="/recipient.html" class="btn btn-green"
+            >Open Recipient Page</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="./admin.js" defer></script>
+  </body>
+</html>

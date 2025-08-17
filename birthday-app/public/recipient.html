@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#EC4899" />
+    <title>Happy Birthday! 🌹</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Your styles (keep your wallpaper + cards etc.) -->
+    <link rel="stylesheet" href="./styles.css?v=standalone1" />
+    <style>
+      /* tiny helpers so this file works alone even if styles.css is stale */
+      body {
+        min-height: 100vh;
+      }
+      .dancing-script {
+        font-family: "Dancing Script", cursive;
+      }
+      .poppins {
+        font-family: "Poppins", sans-serif;
+      }
+      .btn {
+        padding: 0.7rem 1.3rem;
+        border-radius: 9999px;
+        font-weight: 600;
+      }
+      .btn-primary {
+        background: #fff;
+        color: #8a1d51;
+        box-shadow: 0 6px 16px rgba(138, 29, 81, 0.12);
+      }
+      .polaroid {
+        background: #fff;
+        border: 1px solid #ffd6e8;
+        border-radius: 16px;
+        padding: 14px 14px 20px;
+        box-shadow: 0 16px 40px rgba(251, 185, 213, 0.4),
+          0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+      .polaroid-frame {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 72vh;
+        box-shadow: inset 0 0 0 1px rgba(255, 182, 205, 0.35);
+      }
+      .polaroid img {
+        display: block;
+        max-width: 100%;
+        max-height: 72vh;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+      .wish-card {
+        background: rgba(255, 255, 255, 0.46);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+      .prose-wish {
+        max-width: 66ch;
+        margin: 0 auto;
+        color: #6b0635;
+        line-height: 1.9;
+        text-wrap: pretty;
+        hyphens: auto;
+      }
+      .pin-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (min-width: 768px) {
+        .pin-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+      .pin {
+        background: #fff;
+        border: 1px solid #ffdae9;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      }
+      .pin img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .line-reveal {
+        animation: lineIn 0.6s ease both;
+      }
+      @keyframes lineIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="poppins antialiased love-wallpaper">
+    <!-- Confetti layer (kept; harmless if unused) -->
+    <canvas id="confetti" class="fx-layer pointer-events-none"></canvas>
+
+    <!-- Root -->
+    <main id="root"></main>
+    <!-- Pookie overlay: CSS-only floating emojis/ribbons (no JS) -->
+    <div class="pookie-overlay" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <!-- two extra spans become corner ribbons -->
+      <span class="ribbon tl"></span>
+      <span class="ribbon br"></span>
+    </div>
+
+    <!-- Hidden background media mount -->
+    <div id="bg-media" class="hidden"></div>
+
+    <!-- ===== Inline app (no modules) ===== -->
+    <script>
+      // --- tiny helpers ---
+      const $ = (s, r = document) => r.querySelector(s);
+      const esc = (s) =>
+        String(s || "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            }[c])
+        );
+      const toHttp = (u) => {
+        try {
+          const x = new URL(u, location.origin);
+          return /https?:/.test(x.protocol) ? x.href : "";
+        } catch {
+          return "";
+        }
+      };
+
+      async function getData() {
+        const r = await fetch("/api/data", { cache: "no-store" });
+        if (!r.ok) throw new Error("data fetch failed");
+        return r.json();
+      }
+
+      function playMusic(music) {
+        const type = music?.type || "none";
+        const src = music?.src || "";
+        const mount = document.getElementById("bg-media");
+        mount.innerHTML = "";
+        if (type === "file" && src) {
+          const a = new Audio(src);
+          a.loop = true;
+          a.volume = 0.9;
+          a.play().catch(() => {});
+          mount._ref = a;
+        } else if (type === "youtube" && src) {
+          const id =
+            (src.match(
+              /(?:youtu\.be\/|v\/|embed\/|watch\?v=|&v=)([^#&?]{11})/
+            ) || [])[1] || src;
+          mount.innerHTML = `<iframe width="0" height="0" style="position:absolute;left:-9999px;opacity:0"
+            src="https://www.youtube.com/embed/${id}?autoplay=1&controls=0&modestbranding=1&playsinline=1"
+            title="YouTube" frameborder="0" allow="autoplay; encrypted-media"></iframe>`;
+        } else if (type === "spotify" && src) {
+          const id =
+            (src.match(/open\.spotify\.com\/track\/([A-Za-z0-9]{22})/) ||
+              src.match(/spotify:track:([A-Za-z0-9]{22})/) ||
+              [])[1] || src;
+          mount.innerHTML = `<iframe style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"
+            src="https://open.spotify.com/embed/track/${id}" frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+        }
+      }
+
+      function renderHero(root, d, onBegin) {
+        const name = d.recipient?.name ? `, ${esc(d.recipient.name)}` : "";
+        root.innerHTML = `
+          <section id="hero" class="min-h-screen flex items-center justify-center">
+            <div class="text-center px-6">
+              <h1 class="dancing-script text-6xl md:text-8xl font-bold text-rose-900 mb-4">
+                ${esc(d.hero?.title || "Happy Birthday! 🌹")}
+              </h1>
+              <p class="text-xl md:text-2xl text-rose-900/90 mb-8 font-light">
+                ${esc(
+                  (d.hero?.subtitle || "To someone incredibly precious ✨") +
+                    name
+                )}
+              </p>
+              <div class="text-6xl mb-8" aria-hidden="true">💖</div>
+              <button id="begin-btn" class="btn btn-primary shadow-lg">Begin the Celebration 🎉</button>
+            </div>
+          </section>`;
+        $("#begin-btn")?.addEventListener("click", onBegin, { once: true });
+      }
+
+      function renderCelebration(root, d) {
+        const name = d.recipient?.name ? `, ${esc(d.recipient.name)}` : "";
+        root.innerHTML = `
+          <div id="scene">
+            <section class="min-h-[32vh] flex items-center justify-center pt-10 text-center">
+              <div class="max-w-4xl mx-auto px-6">
+                <h1 class="dancing-script text-6xl md:text-7xl font-bold text-rose-900 mb-3">
+                  ${esc(d.hero?.title || "Happy Birthday! 🌹")}
+                </h1>
+                <p class="text-lg md:text-xl text-rose-900/85 font-light">
+                  ${esc(
+                    (d.hero?.subtitle || "To someone incredibly precious ✨") +
+                      name
+                  )}
+                </p>
+              </div>
+            </section>
+
+            <!-- Portrait -->
+            <section class="py-10 px-4">
+              <div class="max-w-5xl mx-auto flex justify-center">
+                <figure class="polaroid soft-glow w-[min(92vw,740px)]">
+                  <div class="polaroid-frame">
+                    <img id="star-photo" src="" alt="For you" loading="eager" fetchpriority="high">
+                  </div>
+                  <figcaption class="caption">For Chanchan 💗 From Angaanba 💗</figcaption>
+                </figure>
+              </div>
+            </section>
+
+            <!-- Wish -->
+            <section class="py-10 px-4">
+              <div class="max-w-3xl mx-auto text-center wish-card">
+                <h2 class="dancing-script text-5xl font-bold text-rose-900 mb-5">A Special Wish 💝</h2>
+                <button id="reveal-wish-btn" class="bg-white text-rose-700 px-7 py-3 rounded-full hover:bg-rose-50 transition shadow">
+                  Reveal Message 🎁
+                </button>
+                <div id="birthday-wish" class="hidden mt-6 text-xl leading-relaxed prose-wish"></div>
+              </div>
+            </section>
+
+            <!-- Pins -->
+            <section class="py-10 px-4">
+              <div class="max-w-6xl mx-auto">
+                <h2 class="dancing-script text-5xl font-bold text-rose-900 text-center mb-6">Cute Cat pics(since u like cats) ✨</h2>
+                <div id="pin-wall" class="pin-grid"></div>
+              </div>
+            </section>
+          </div>`;
+      }
+
+      function hydrate(d) {
+        // portrait
+        const first = (Array.isArray(d.gallery) ? d.gallery : [])[0];
+        const star = $("#star-photo");
+        if (star) {
+          const url = toHttp(first?.url);
+          if (url) star.src = url;
+          else
+            star.replaceWith(
+              (() => {
+                const f = document.createElement("div");
+                f.className = "polaroid soft-glow w-[min(92vw,740px)]";
+                f.innerHTML = `<div class="polaroid-frame" style="height:62vh;min-height:360px"><div class="text-rose-700/85">Add a portrait in Admin → Gallery</div></div><div class="caption">for you 💗</div>`;
+                return f;
+              })()
+            );
+        }
+
+        // wish
+        const out = $("#birthday-wish");
+        const btn = $("#reveal-wish-btn");
+        if (out && btn) {
+          const lines = Array.isArray(d.wish)
+            ? d.wish
+            : typeof d.wish === "string"
+            ? d.wish.split("\n").filter(Boolean)
+            : [];
+          out.innerHTML = "";
+          lines.forEach((t, i) => {
+            const p = document.createElement("p");
+            p.className =
+              i === 0 ? "dancing-script text-3xl line-reveal" : "line-reveal";
+            p.style.animationDelay = i * 120 + "ms";
+            p.textContent = t;
+            out.appendChild(p);
+          });
+          btn.addEventListener(
+            "click",
+            () => {
+              out.classList.remove("hidden");
+              btn.style.display = "none";
+            },
+            { once: true }
+          );
+        }
+
+        // pins from links
+        const wall = $("#pin-wall");
+        if (wall) {
+          wall.innerHTML = "";
+          const links = Array.isArray(d.links) ? d.links : [];
+          if (!links.length) {
+            wall.innerHTML = `<div class="text-rose-900/70 text-center">Add cute Pinterest image URLs in Admin → Links ✨</div>`;
+          } else {
+            const frag = document.createDocumentFragment();
+            links.forEach((l, i) => {
+              const url = toHttp(l?.url);
+              if (!url) return;
+              const cell = document.createElement("div");
+              cell.className = "pin";
+              cell.style.setProperty("--tilt", i % 2 ? 1 : -1);
+              cell.innerHTML = `<img src="${esc(
+                url
+              )}" alt="pin" loading="lazy" referrerpolicy="no-referrer">`;
+              frag.appendChild(cell);
+            });
+            wall.appendChild(frag);
+          }
+        }
+      }
+
+      // boot
+      (async function () {
+        try {
+          const data = await getData();
+          renderHero($("#root"), data, () => {
+            renderCelebration($("#root"), data);
+            hydrate(data);
+            playMusic(data.music || { type: "none", src: "" });
+          });
+        } catch (e) {
+          console.error(e);
+          const data = {
+            hero: {
+              title: "Happy Birthday! 🌹",
+              subtitle: "To someone incredibly precious ✨",
+            },
+            recipient: { name: "" },
+            wish: ["You are amazing!"],
+            links: [],
+            gallery: [],
+            music: { type: "none", src: "" },
+          };
+          renderHero($("#root"), data, () => {
+            renderCelebration($("#root"), data);
+            hydrate(data);
+          });
+        }
+      })();
+    </script>
+
+    <!-- NEW: tiny module to attach party-popper & scroll micro-bursts -->
+    <!-- Effects module: party popper on clicks + scroll micro-bursts -->
+    <script type="module">
+      import {
+        popperAt,
+        burstAt as confettiBurstAt,
+        drizzle,
+      } from "./js/confetti.js";
+      function attachHero() {
+        const btn = document.getElementById("begin-btn");
+        if (!btn || btn._fxBound) return;
+        btn._fxBound = true;
+        btn.addEventListener(
+          "click",
+          (e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            popperAt(r.left + r.width / 2, r.top + r.height / 2);
+            confettiBurstAt(r.left + r.width / 2, r.top + r.height / 2);
+            drizzle(700);
+          },
+          { once: true, passive: true }
+        );
+      }
+      function attachReveal() {
+        const b = document.getElementById("reveal-wish-btn");
+        if (!b || b._fxBound) return;
+        b._fxBound = true;
+        b.addEventListener(
+          "click",
+          (e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            popperAt(r.left + r.width / 2, r.top + r.height / 2);
+            drizzle(800);
+          },
+          { once: true }
+        );
+      }
+      function setupScrollBursts() {
+        const sections = Array.from(
+          document.querySelectorAll("#scene section")
+        );
+        if (!sections.length) return;
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((en) => {
+              if (en.isIntersecting && !en.target._popped) {
+                en.target._popped = true;
+                const r = en.target.getBoundingClientRect();
+                popperAt(
+                  r.left + r.width / 2,
+                  r.top + Math.min(r.height * 0.35, 220)
+                );
+              }
+            });
+          },
+          { threshold: 0.35 }
+        );
+        sections.forEach((s) => io.observe(s));
+      }
+      const mo = new MutationObserver(() => {
+        attachHero();
+        attachReveal();
+        setupScrollBursts();
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+      attachHero();
+      attachReveal();
+      setupScrollBursts();
+    </script>
+  </body>
+</html>

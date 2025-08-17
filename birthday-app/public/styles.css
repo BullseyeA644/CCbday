@@ -1,0 +1,1212 @@
+/* Fonts */
+.dancing-script {
+  font-family: "Dancing Script", cursive;
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+/* 🌹 Warm rose wallpaper (gradient + tiny tiled hearts/sparkles) */
+.love-wallpaper {
+  /* base gradient */
+  background: radial-gradient(
+      120% 120% at 50% -10%,
+      #ffe8f1 0%,
+      #ffd7e7 28%,
+      #ffc6dc 54%,
+      #ffb7d3 76%,
+      #ffa5c9 100%
+    )
+    fixed;
+  /* tiled pattern (inline SVG data URI) */
+  --tile: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+    <g fill='none' fill-rule='evenodd'>\
+      <path d='M60 20 c6-7 19-7 25 0 7 8 6 19-1 26L60 80 36 46c-7-7-8-18-1-26 6-7 19-7 25 0z' fill='%23ffb3d1' fill-opacity='.25'/>\
+      <path d='M95 95 l6-2 2-6 2 6 6 2-6 2-2 6-2-6z' fill='%23ffd7e7' fill-opacity='.45'/>\
+      <path d='M20 90 l5-2 2-5 2 5 5 2-5 2-2 5-2-5z' fill='%23ffc6dc' fill-opacity='.45'/>\
+      <circle cx='28' cy='28' r='3' fill='%23ffa5c9' fill-opacity='.6'/>\
+      <circle cx='92' cy='36' r='2.5' fill='%23ff9ec5' fill-opacity='.6'/>\
+    </g></svg>");
+  background-image: var(--tile);
+  background-repeat: repeat;
+  background-size: 220px 220px;
+  background-blend-mode: soft-light;
+}
+
+/* Gentle vignette for readability */
+.love-wallpaper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    120% 140% at 50% 10%,
+    rgba(255, 255, 255, 0) 0 66%,
+    rgba(0, 0, 0, 0.06) 88%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+/* Buttons */
+.btn {
+  padding: 0.7rem 1.3rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+.btn-primary {
+  background: #ffffff;
+  color: #8a1d51;
+  box-shadow: 0 6px 16px rgba(138, 29, 81, 0.12);
+}
+.btn-primary:hover {
+  background: #fff7fb;
+}
+
+/* Crossfade */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Section reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.7s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* Header pulse */
+.heart-pulse {
+  animation: heartPulse 1.8s ease-in-out infinite;
+}
+@keyframes heartPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Confetti canvas */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+/* Cards — more opaque for readability */
+.card {
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Polaroid highlight — uncropped portrait */
+.polaroid {
+  background: #ffffff;
+  border: 1px solid #ffd6e8;
+  border-radius: 16px;
+  padding: 14px 14px 20px;
+  box-shadow: 0 16px 40px rgba(251, 185, 213, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: rotate(-0.4deg);
+}
+.polaroid-frame {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 72vh;
+  box-shadow: inset 0 0 0 1px rgba(255, 182, 205, 0.35);
+}
+.polaroid img {
+  display: block;
+  max-width: 100%;
+  max-height: 72vh;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.polaroid .caption {
+  margin-top: 10px;
+  text-align: center;
+  color: #a21a53;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.soft-glow {
+  box-shadow: 0 18px 50px rgba(251, 185, 213, 0.45),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Wish card */
+.wish-card {
+  background: rgba(255, 255, 255, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+.prose-wish {
+  max-width: 66ch;
+  margin: 0 auto;
+  color: #6b0635;
+  line-height: 1.9;
+  text-wrap: pretty;
+  hyphens: auto;
+}
+.prose-wish p + p {
+  margin-top: 14px;
+}
+
+/* Pins collage */
+.pin-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .pin-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.pin {
+  background: #fff;
+  border: 1px solid #ffdae9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: rotate(calc(var(--tilt, 0) * 1deg));
+}
+.pin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 💥 Heart burst overlay (DOM spans; super reliable) */
+.burst-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+.burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  user-select: none;
+  width: 18px;
+  height: 18px; /* SVG injected */
+  animation: burstUp 1.35s ease-out forwards;
+}
+@keyframes burstUp {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-50%, -90%) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -140%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .heart-pulse,
+  .reveal,
+  .fade-enter,
+  .fade-enter-active {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   Pookie overlay (CSS-only): ribbons + floating hearts/sparkles
+   No HTML changes needed.
+   ---------------------------------------------------------- */
+
+/* 1) Make the app content sit above decorative layers */
+#root {
+  position: relative;
+  z-index: 3;
+}
+
+/* 2) Corner ribbons (fixed) — gentle bobbing */
+#root::before,
+#root::after {
+  content: "";
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 2; /* below content (#root z=3), above hearts (z=1) */
+  filter: drop-shadow(0 10px 20px rgba(255, 102, 153, 0.18));
+  opacity: 0.75;
+  animation: ribbonBob 4.5s ease-in-out infinite;
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: auto;
+}
+/* top-left ribbon */
+#root::before {
+  left: 10px;
+  top: 10px;
+  transform-origin: 20% 20%;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'>\
+    <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+      <stop stop-color='%23ffb3d1' offset='0'/>\
+      <stop stop-color='%23ffa5c9' offset='1'/>\
+    </linearGradient></defs>\
+    <path d='M18 58c18-32 54-50 80-38 16 7 18 27-4 44l10 34-34-10c-26 14-49 7-54-6-4-11 3-20 14-24z' fill='url(%23g)'/>\
+    <circle cx='100' cy='28' r='8' fill='%23ffd7e7'/>\
+    <circle cx='108' cy='40' r='5' fill='%23ffc6dc'/>\
+  </svg>");
+}
+/* bottom-right ribbon */
+#root::after {
+  right: 10px;
+  bottom: 10px;
+  transform-origin: 80% 80%;
+  animation-delay: 0.9s;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'>\
+    <defs><linearGradient id='g2' x1='1' y1='0' x2='0' y2='1'>\
+      <stop stop-color='%23ffc6dc' offset='0'/>\
+      <stop stop-color='%23ffb3d1' offset='1'/>\
+    </linearGradient></defs>\
+    <path d='M122 82c-18 32-54 50-80 38-16-7-18-27 4-44l-10-34 34 10c26-14 49-7 54 6 4 11-3 20-14 24z' fill='url(%23g2)'/>\
+    <circle cx='42' cy='112' r='7' fill='%23ffd7e7'/>\
+    <circle cx='32' cy='100' r='4' fill='%23ffc6dc'/>\
+  </svg>");
+}
+
+@keyframes ribbonBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1deg) scale(1.02);
+  }
+}
+
+/* 3) Floating hearts & sparkles — two parallax layers, behind content */
+
+/* Layer A: hearts + sparkles, slower drift */
+.love-wallpaper::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* under content; above gradient */
+  opacity: 0.3;
+  background-repeat: repeat;
+  background-size: 240px 240px, /* big hearts */ 260px 260px; /* sparkles */
+  background-image: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 120 120'>\
+        <path d='M60 20c6-7 19-7 25 0 7 8 6 19-1 26L60 80 36 46c-7-7-8-18-1-26 6-7 19-7 25 0z' fill='%23ffb3d1' fill-opacity='.26'/>\
+        <circle cx='20' cy='22' r='2.6' fill='%23ffa5c9'/>\
+        <circle cx='98' cy='30' r='2.6' fill='%23ff9ec5'/>\
+      </svg>"),
+    url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 120 120'>\
+        <path d='M60 4 L66 22 L84 28 L66 34 L60 52 L54 34 L36 28 L54 22 Z' fill='%23ffd7e7' fill-opacity='.55'/>\
+        <path d='M12 86 L16 96 L26 100 L16 104 L12 114 L8 104 L-2 100 L8 96 Z' fill='%23ffc6dc' fill-opacity='.55'/>\
+      </svg>");
+  animation: pookieDriftA 42s linear infinite;
+}
+
+@keyframes pookieDriftA {
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 0px -900px, 0px -1200px;
+  }
+}
+
+/* Layer B: tiny hearts (faster/parallax) */
+#root::marker, /* noop to avoid unused warning in some tools */ 
+#root::selection {
+  color: inherit;
+} /* harmless */
+
+#root::selection {
+  background: rgba(255, 255, 255, 0.28);
+  color: #9d174d;
+} /* keeps your selection style */
+
+#root > *::before {
+} /* no-op guard */
+
+/* Use the main content wrapper (#root) to host a second drifting field */
+#root::marker {
+} /* noop */
+
+#root::after {
+  /* this is already used for ribbon; handled above */
+}
+
+/* Create a second floating field on the BODY using a utility class hook */
+body.love-wallpaper::before {
+  /* we already used ::before for vignette in some versions,
+     so shift vignette to .love-wallpaper::before (if present),
+     and keep the hearts on ::after (above). If your file already uses
+     ::before for vignette, no change needed. */
+}
+
+/* Optional extra micro-hearts layer (super subtle) */
+@media (min-width: 480px) {
+  .love-wallpaper .pookie-mini-hearts {
+    display: none;
+  } /* placeholder for lint */
+}
+
+@keyframes pookieDriftB {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 -1400px, 0 -1000px;
+  }
+}
+
+.love-wallpaper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.18;
+  background-repeat: repeat;
+  background-size: 180px 180px, 200px 200px;
+  background-image: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 120 120'>\
+        <path d='M60 20c6-7 19-7 25 0 7 8 6 19-1 26L60 80 36 46c-7-7-8-18-1-26 6-7 19-7 25 0z' fill='%23ffa5c9' fill-opacity='.24'/>\
+        <circle cx='30' cy='96' r='2.4' fill='%23ff9ec5'/>\
+        <circle cx='86' cy='12' r='2.4' fill='%23ffc6dc'/>\
+      </svg>"),
+    url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 120 120'>\
+        <path d='M60 4 L66 22 L84 28 L66 34 L60 52 L54 34 L36 28 L54 22 Z' fill='%23ffd7e7' fill-opacity='.45'/>\
+      </svg>");
+  animation: pookieDriftB 65s linear infinite;
+}
+
+/* ============================================================
+   Pookie Overlay (Layer 2) — above the whole page, CSS-only
+   - floats heart/sparkle emojis up the screen forever
+   - adds two cute ribbons in corners
+   - pointer-events: none so it never blocks clicks
+   - z-index > confetti? keep it just above content but below confetti:
+     confetti z-index is 40 in your CSS, so we set overlay to 35.
+   ============================================================ */
+
+.pookie-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 35; /* content < 35 < confetti (40) */
+  overflow: hidden; /* clip offscreen spans */
+}
+
+/* each <span> becomes a floating emoji via its ::before */
+.pookie-overlay > span {
+  position: absolute;
+  left: 50%;
+  bottom: -10vh; /* start slightly below the viewport */
+  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 0;
+  animation: pookieFloat var(--dur, 8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+/* the actual glyph lives in ::before so we can size it */
+.pookie-overlay > span::before {
+  content: var(--glyph, "💖");
+  font-size: var(--fs, 24px);
+  line-height: 1;
+  display: block;
+}
+
+/* keyframes: float up with a little sideways wiggle + fade */
+@keyframes pookieFloat {
+  0% {
+    transform: translateX(var(--x, 0)) translateY(0) scale(var(--scale, 1));
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateX(calc(var(--x, 0) + var(--wiggle, 40px)))
+      translateY(-52vh) scale(calc(var(--scale, 1) * 1.06));
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(var(--x, 0)) translateY(-110vh)
+      scale(calc(var(--scale, 1) * 1.12));
+    opacity: 0;
+  }
+}
+
+/* distribute positions/sizes/glyphs using nth-child.
+   feel free to tweak the lists below (glyph, size, duration, left offset). */
+
+.pookie-overlay > span:nth-child(1) {
+  --glyph: "💖";
+  --fs: 28px;
+  --x: -36vw;
+  --wiggle: 36px;
+  --scale: 1;
+  --dur: 9.5s;
+  --delay: 0s;
+}
+.pookie-overlay > span:nth-child(2) {
+  --glyph: "💕";
+  --fs: 22px;
+  --x: -22vw;
+  --wiggle: 28px;
+  --scale: 0.95;
+  --dur: 8.4s;
+  --delay: 1.1s;
+}
+.pookie-overlay > span:nth-child(3) {
+  --glyph: "💗";
+  --fs: 24px;
+  --x: -8vw;
+  --wiggle: 34px;
+  --scale: 1.02;
+  --dur: 10s;
+  --delay: 2s;
+}
+.pookie-overlay > span:nth-child(4) {
+  --glyph: "💘";
+  --fs: 26px;
+  --x: 6vw;
+  --wiggle: 30px;
+  --scale: 0.98;
+  --dur: 9.2s;
+  --delay: 0.6s;
+}
+.pookie-overlay > span:nth-child(5) {
+  --glyph: "💝";
+  --fs: 20px;
+  --x: 18vw;
+  --wiggle: 22px;
+  --scale: 0.9;
+  --dur: 7.8s;
+  --delay: 1.8s;
+}
+.pookie-overlay > span:nth-child(6) {
+  --glyph: "🩷";
+  --fs: 28px;
+  --x: 32vw;
+  --wiggle: 36px;
+  --scale: 1.06;
+  --dur: 10.6s;
+  --delay: 0.3s;
+}
+.pookie-overlay > span:nth-child(7) {
+  --glyph: "✨";
+  --fs: 18px;
+  --x: -30vw;
+  --wiggle: 42px;
+  --scale: 0.92;
+  --dur: 8.8s;
+  --delay: 2.6s;
+}
+.pookie-overlay > span:nth-child(8) {
+  --glyph: "💞";
+  --fs: 22px;
+  --x: -16vw;
+  --wiggle: 30px;
+  --scale: 0.96;
+  --dur: 9.8s;
+  --delay: 0.9s;
+}
+.pookie-overlay > span:nth-child(9) {
+  --glyph: "💕";
+  --fs: 24px;
+  --x: -2vw;
+  --wiggle: 26px;
+  --scale: 1;
+  --dur: 8.6s;
+  --delay: 1.7s;
+}
+.pookie-overlay > span:nth-child(10) {
+  --glyph: "💖";
+  --fs: 30px;
+  --x: 12vw;
+  --wiggle: 38px;
+  --scale: 1.08;
+  --dur: 10.2s;
+  --delay: 0.2s;
+}
+.pookie-overlay > span:nth-child(11) {
+  --glyph: "✨";
+  --fs: 18px;
+  --x: 26vw;
+  --wiggle: 28px;
+  --scale: 0.9;
+  --dur: 7.6s;
+  --delay: 1.4s;
+}
+.pookie-overlay > span:nth-child(12) {
+  --glyph: "💓";
+  --fs: 22px;
+  --x: 38vw;
+  --wiggle: 32px;
+  --scale: 0.98;
+  --dur: 9s;
+  --delay: 2.2s;
+}
+.pookie-overlay > span:nth-child(13) {
+  --glyph: "💗";
+  --fs: 26px;
+  --x: -40vw;
+  --wiggle: 36px;
+  --scale: 1.04;
+  --dur: 10.8s;
+  --delay: 1s;
+}
+.pookie-overlay > span:nth-child(14) {
+  --glyph: "💘";
+  --fs: 20px;
+  --x: 44vw;
+  --wiggle: 34px;
+  --scale: 0.94;
+  --dur: 8.2s;
+  --delay: 2.8s;
+}
+
+/* Corner ribbons — CSS-only stickers */
+.pookie-overlay .ribbon {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  opacity: 0.85;
+  filter: drop-shadow(0 10px 20px rgba(255, 102, 153, 0.18));
+  animation: ribbonBob 4.8s ease-in-out infinite;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.pookie-overlay .ribbon.tl {
+  left: 8px;
+  top: 8px;
+  transform-origin: 20% 20%;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'>\
+    <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+      <stop stop-color='%23ffb3d1' offset='0'/>\
+      <stop stop-color='%23ffa5c9' offset='1'/>\
+    </linearGradient></defs>\
+    <path d='M18 58c18-32 54-50 80-38 16 7 18 27-4 44l10 34-34-10c-26 14-49 7-54-6-4-11 3-20 14-24z' fill='url(%23g)'/>\
+    <circle cx='100' cy='28' r='8' fill='%23ffd7e7'/>\
+    <circle cx='108' cy='40' r='5' fill='%23ffc6dc'/>\
+  </svg>");
+}
+.pookie-overlay .ribbon.br {
+  right: 8px;
+  bottom: 8px;
+  transform-origin: 80% 80%;
+  animation-delay: 0.9s;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'>\
+    <defs><linearGradient id='g2' x1='1' y1='0' x2='0' y2='1'>\
+      <stop stop-color='%23ffc6dc' offset='0'/>\
+      <stop stop-color='%23ffb3d1' offset='1'/>\
+    </linearGradient></defs>\
+    <path d='M122 82c-18 32-54 50-80 38-16-7-18-27 4-44l-10-34 34 10c26-14 49-7 54 6 4 11-3 20-14 24z' fill='url(%23g2)'/>\
+    <circle cx='42' cy='112' r='7' fill='%23ffd7e7'/>\
+    <circle cx='32' cy='100' r='4' fill='%23ffc6dc'/>\
+  </svg>");
+}
+
+@keyframes ribbonBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1deg) scale(1.02);
+  }
+}
+
+/* Small screens: tone down sizes so it never feels crowded */
+@media (max-width: 430px) {
+  .pookie-overlay .ribbon {
+    width: 110px;
+    height: 110px;
+  }
+  .pookie-overlay > span::before {
+    font-size: calc(var(--fs, 24px) * 0.9);
+  }
+}
+/* ================== SIDE-BANDS FLOATING EMOJIS (CSS-only) ==================
+   - No traversal across the page; each emoji gently bobs in place
+   - Positioned only in left & right "empty space" bands (keeps center clean)
+   - Works with your existing <div class="pookie-overlay"> … <span>…</span>
+   - Leave ribbons as-is; we keep them from the previous block
+   ========================================================================== */
+
+.pookie-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 35; /* below confetti (40), above content */
+  overflow: hidden;
+}
+
+/* base style for every floating item */
+.pookie-overlay > span {
+  position: absolute;
+  top: var(--top, 10vh);
+  left: var(--left, 8vw); /* set per nth-child to side-bands */
+  opacity: 0.85;
+  transform: translate(-50%, 0) scale(var(--scale, 1));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+  animation: pookieBob var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.pookie-overlay > span::before {
+  content: var(--glyph, "💖");
+  font-size: var(--fs, 26px);
+  line-height: 1;
+  display: block;
+}
+
+/* bob/wiggle in place (no vertical traverse off-screen) */
+@keyframes pookieBob {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg) scale(var(--scale, 1));
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(
+        calc(-50% + var(--wiggleX, 6px)),
+        calc(var(--wiggleY, -10px))
+      )
+      rotate(var(--tilt, -3deg)) scale(calc(var(--scale, 1) * 1.03));
+  }
+  100% {
+    transform: translate(-50%, 0) rotate(0deg) scale(var(--scale, 1));
+    opacity: 0.85;
+  }
+}
+
+/* ---------- layout bands ----------
+   Left band: 6vw–22vw, Right band: 78vw–96vw (keeps middle clear) */
+
+/* You can change density just by adding/removing <span>s in HTML.
+   Below we assign each span to a lane, top position, size, and emoji. */
+
+.pookie-overlay > span:nth-child(1) {
+  --left: 8vw;
+  --top: 14vh;
+  --glyph: "💖";
+  --fs: 28px;
+  --scale: 1;
+  --dur: 7.6s;
+  --delay: 0s;
+  --wiggleX: 10px;
+  --wiggleY: -12px;
+  --tilt: -2deg;
+}
+.pookie-overlay > span:nth-child(2) {
+  --left: 16vw;
+  --top: 28vh;
+  --glyph: "💕";
+  --fs: 22px;
+  --scale: 0.96;
+  --dur: 6.8s;
+  --delay: 1s;
+  --wiggleX: 8px;
+  --wiggleY: -10px;
+  --tilt: -3deg;
+}
+.pookie-overlay > span:nth-child(3) {
+  --left: 22vw;
+  --top: 44vh;
+  --glyph: "💗";
+  --fs: 24px;
+  --scale: 1.02;
+  --dur: 8.4s;
+  --delay: 0.5s;
+  --wiggleX: 12px;
+  --wiggleY: -14px;
+  --tilt: -4deg;
+}
+.pookie-overlay > span:nth-child(4) {
+  --left: 10vw;
+  --top: 58vh;
+  --glyph: "💘";
+  --fs: 26px;
+  --scale: 0.98;
+  --dur: 7.8s;
+  --delay: 1.6s;
+  --wiggleX: 9px;
+  --wiggleY: -11px;
+  --tilt: -2deg;
+}
+.pookie-overlay > span:nth-child(5) {
+  --left: 18vw;
+  --top: 72vh;
+  --glyph: "✨";
+  --fs: 18px;
+  --scale: 0.92;
+  --dur: 6.6s;
+  --delay: 0.8s;
+  --wiggleX: 7px;
+  --wiggleY: -9px;
+  --tilt: -1deg;
+}
+.pookie-overlay > span:nth-child(6) {
+  --left: 6vw;
+  --top: 34vh;
+  --glyph: "💞";
+  --fs: 22px;
+  --scale: 0.98;
+  --dur: 8.2s;
+  --delay: 2.2s;
+  --wiggleX: 11px;
+  --wiggleY: -13px;
+  --tilt: -3deg;
+}
+.pookie-overlay > span:nth-child(7) {
+  --left: 80vw;
+  --top: 18vh;
+  --glyph: "💝";
+  --fs: 24px;
+  --scale: 1;
+  --dur: 7.4s;
+  --delay: 0.4s;
+  --wiggleX: 10px;
+  --wiggleY: -12px;
+  --tilt: 2deg;
+}
+.pookie-overlay > span:nth-child(8) {
+  --left: 88vw;
+  --top: 30vh;
+  --glyph: "🩷";
+  --fs: 28px;
+  --scale: 1.06;
+  --dur: 8.6s;
+  --delay: 1.4s;
+  --wiggleX: 12px;
+  --wiggleY: -14px;
+  --tilt: 3deg;
+}
+.pookie-overlay > span:nth-child(9) {
+  --left: 94vw;
+  --top: 46vh;
+  --glyph: "💓";
+  --fs: 22px;
+  --scale: 0.96;
+  --dur: 6.9s;
+  --delay: 0.9s;
+  --wiggleX: 8px;
+  --wiggleY: -10px;
+  --tilt: 2deg;
+}
+.pookie-overlay > span:nth-child(10) {
+  --left: 82vw;
+  --top: 60vh;
+  --glyph: "✨";
+  --fs: 18px;
+  --scale: 0.9;
+  --dur: 6.4s;
+  --delay: 2s;
+  --wiggleX: 7px;
+  --wiggleY: -9px;
+  --tilt: 1deg;
+}
+.pookie-overlay > span:nth-child(11) {
+  --left: 90vw;
+  --top: 74vh;
+  --glyph: "💕";
+  --fs: 24px;
+  --scale: 1;
+  --dur: 7.8s;
+  --delay: 0.2s;
+  --wiggleX: 10px;
+  --wiggleY: -12px;
+  --tilt: 2deg;
+}
+.pookie-overlay > span:nth-child(12) {
+  --left: 78vw;
+  --top: 36vh;
+  --glyph: "💗";
+  --fs: 26px;
+  --scale: 1.04;
+  --dur: 8.8s;
+  --delay: 1.8s;
+  --wiggleX: 12px;
+  --wiggleY: -15px;
+  --tilt: 3deg;
+}
+.pookie-overlay > span:nth-child(13) {
+  --left: 14vw;
+  --top: 20vh;
+  --glyph: "💖";
+  --fs: 20px;
+  --scale: 0.94;
+  --dur: 6.2s;
+  --delay: 2.4s;
+  --wiggleX: 7px;
+  --wiggleY: -8px;
+  --tilt: -2deg;
+}
+.pookie-overlay > span:nth-child(14) {
+  --left: 86vw;
+  --top: 24vh;
+  --glyph: "💘";
+  --fs: 20px;
+  --scale: 0.94;
+  --dur: 6.6s;
+  --delay: 2.8s;
+  --wiggleX: 8px;
+  --wiggleY: -9px;
+  --tilt: 2deg;
+}
+
+/* Keep the two corner ribbons from your previous overlay block */
+.pookie-overlay .ribbon {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  opacity: 0.85;
+  filter: drop-shadow(0 10px 20px rgba(255, 102, 153, 0.18));
+  animation: ribbonBob 4.8s ease-in-out infinite;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.pookie-overlay .ribbon.tl {
+  left: 8px;
+  top: 8px;
+  transform-origin: 20% 20%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23ffb3d1' offset='0'/><stop stop-color='%23ffa5c9' offset='1'/></linearGradient></defs><path d='M18 58c18-32 54-50 80-38 16 7 18 27-4 44l10 34-34-10c-26 14-49 7-54-6-4-11 3-20 14-24z' fill='url(%23g)'/><circle cx='100' cy='28' r='8' fill='%23ffd7e7'/><circle cx='108' cy='40' r='5' fill='%23ffc6dc'/></svg>");
+}
+.pookie-overlay .ribbon.br {
+  right: 8px;
+  bottom: 8px;
+  transform-origin: 80% 80%;
+  animation-delay: 0.9s;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'><defs><linearGradient id='g2' x1='1' y1='0' x2='0' y2='1'><stop stop-color='%23ffc6dc' offset='0'/><stop stop-color='%23ffb3d1' offset='1'/></linearGradient></defs><path d='M122 82c-18 32-54 50-80 38-16-7-18-27 4-44l-10-34 34 10c26-14 49-7 54 6 4 11-3 20-14 24z' fill='url(%23g2)'/><circle cx='42' cy='112' r='7' fill='%23ffd7e7'/><circle cx='32' cy='100' r='4' fill='%23ffc6dc'/></svg>");
+}
+
+@keyframes ribbonBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+}
+
+/* Small screens: scale down a touch so edges don't crowd */
+@media (max-width: 430px) {
+  .pookie-overlay .ribbon {
+    width: 110px;
+    height: 110px;
+  }
+  .pookie-overlay > span::before {
+    font-size: calc(var(--fs, 26px) * 0.9);
+  }
+  .pookie-overlay > span {
+    --wiggleX: 6px;
+    --wiggleY: -8px;
+  }
+}
+/* === Mobile tidy-up for wallpaper overlap === */
+@media (max-width: 520px) {
+  /* 1) Make the tiled hearts/sparkles lighter & larger (less busy) */
+  .love-wallpaper::after {
+    opacity: 0.18; /* was ~.30 */
+    background-size: 300px 300px, 320px 320px; /* bigger tiles = fewer shapes */
+  }
+
+  /* 2) Slightly stronger vignette at the very top for readability */
+  .love-wallpaper::before {
+    background: radial-gradient(
+      130% 150% at 50% 6%,
+      rgba(255, 255, 255, 0) 0 58%,
+      rgba(0, 0, 0, 0.07) 86%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
+  }
+
+  /* 3) Add a soft glass pad behind the hero text only on small screens */
+  #hero .text-center {
+    background: rgba(255, 255, 255, 0.58);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  /* (optional) dial down side ribbons a bit so they don’t crowd */
+  .pookie-overlay .ribbon {
+    transform: scale(0.9);
+    opacity: 0.75;
+  }
+}
+/* =========================================================
+   MOBILE COMFORT PASSES (stack nicer, less crowding)
+   ========================================================= */
+
+/* Phones */
+@media (max-width: 520px) {
+  /* 1) Calmer wallpaper + stronger top fade */
+  .love-wallpaper::after {
+    opacity: 0.14;
+    background-size: 320px 320px, 340px 340px;
+  }
+  .love-wallpaper::before {
+    background: radial-gradient(
+      135% 160% at 50% 4%,
+      rgba(255, 255, 255, 0) 0 56%,
+      rgba(0, 0, 0, 0.06) 84%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
+  }
+
+  /* 2) Hero: reduce sizes + add subtle glass pad */
+  #hero .text-center {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin: 0 10px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  }
+  #hero h1 {
+    font-size: clamp(36px, 8vw, 48px);
+    line-height: 1.1;
+    margin-bottom: 0.35rem;
+  }
+  #hero p {
+    font-size: clamp(14px, 4.3vw, 18px);
+  }
+
+  /* 3) Global section spacing */
+  section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .reveal,
+  .wish-card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 4) Portrait: narrower and shorter so it doesn’t push everything */
+  .polaroid {
+    width: min(92vw, 560px);
+    padding: 12px 12px 16px;
+  }
+  .polaroid-frame {
+    max-height: 60vh;
+  }
+  .polaroid .caption {
+    font-size: 14px;
+  }
+
+  /* 5) Wish: tighter, better readable line-length */
+  .wish-card {
+    padding: 16px;
+  }
+  .prose-wish {
+    max-width: 54ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  /* 6) Pins: use 2 cols, but allow 1 col on extra tiny */
+  .pin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pin {
+    border-radius: 12px;
+  }
+
+  /* 7) Overlay stickers: keep sides but reduce density/size */
+  .pookie-overlay .ribbon {
+    transform: scale(0.85);
+    opacity: 0.72;
+  }
+  .pookie-overlay > span::before {
+    font-size: calc(var(--fs, 26px) * 0.85);
+  }
+  /* hide a few to free space (pick some nth-childs) */
+  .pookie-overlay > span:nth-child(3),
+  .pookie-overlay > span:nth-child(6),
+  .pookie-overlay > span:nth-child(12) {
+    display: none;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  /* even smaller titles & gutters */
+  #hero h1 {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+  #hero p {
+    font-size: clamp(13px, 4.5vw, 16px);
+  }
+  section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .polaroid {
+    width: min(94vw, 520px);
+  }
+  .polaroid-frame {
+    max-height: 52vh;
+  }
+
+  /* 1-column pins so it doesn’t feel cramped */
+  .pin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tall/narrow devices (e.g., 360×740) — loosen vertical rhythm a bit */
+@media (max-width: 420px) and (min-height: 700px) {
+  #hero {
+    min-height: 86vh;
+  } /* give hero its own screen */
+  .wish-card {
+    margin-top: 10px;
+  }
+}
+/* =========================================================
+   MOBILE SAFE-CENTER: keep the middle clean on phones
+   - Hides/fades decorative layers near center (portrait + text)
+   - Works for the tiled wallpaper hearts and the emoji overlay
+   ========================================================= */
+@media (max-width: 540px) {
+  /* 1) Wallpaper pattern: lighten AND cut a hole in center */
+  .love-wallpaper::after {
+    opacity: 0.14; /* calmer */
+    background-size: 320px 320px, 340px 340px;
+
+    /* mask: make center transparent, sides visible */
+    -webkit-mask-image: radial-gradient(
+      ellipse at 50% 32%,
+      transparent 0 34%,
+      rgba(0, 0, 0, 1) 46% 100%
+    );
+    mask-image: radial-gradient(
+      ellipse at 50% 32%,
+      transparent 0 34%,
+      rgba(0, 0, 0, 1) 46% 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* 2) Floating emoji/ribbon overlay: keep only the side bands */
+  .pookie-overlay {
+    /* transparent in middle, visible at sides */
+    -webkit-mask-image: radial-gradient(
+      ellipse at 50% 40%,
+      transparent 0 36%,
+      rgba(0, 0, 0, 1) 48% 100%
+    );
+    mask-image: radial-gradient(
+      ellipse at 50% 40%,
+      transparent 0 36%,
+      rgba(0, 0, 0, 1) 48% 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* Optional: shrink a bit more so nothing feels crowded */
+  .pookie-overlay > span::before {
+    font-size: calc(var(--fs, 26px) * 0.85);
+  }
+  .pookie-overlay .ribbon {
+    transform: scale(0.88);
+    opacity: 0.78;
+  }
+}
+
+/* Slightly larger phones (e.g., iPhone Plus, Samsung large) */
+@media (min-width: 541px) and (max-width: 680px) {
+  .love-wallpaper::after {
+    -webkit-mask-image: radial-gradient(
+      ellipse at 50% 30%,
+      transparent 0 28%,
+      rgba(0, 0, 0, 1) 44% 100%
+    );
+    mask-image: radial-gradient(
+      ellipse at 50% 30%,
+      transparent 0 28%,
+      rgba(0, 0, 0, 1) 44% 100%
+    );
+  }
+  .pookie-overlay {
+    -webkit-mask-image: radial-gradient(
+      ellipse at 50% 38%,
+      transparent 0 30%,
+      rgba(0, 0, 0, 1) 46% 100%
+    );
+    mask-image: radial-gradient(
+      ellipse at 50% 38%,
+      transparent 0 30%,
+      rgba(0, 0, 0, 1) 46% 100%
+    );
+  }
+}
